@@ -99,7 +99,7 @@ int main(void) {
 
 ### GPIO Configuration
 
-- **Signal A (PA10)**: Configured as an input with interrupt on rising edge.
+- **Signal A (PA10)**: Configured as an input with interrupt on rising/falling edge.
 - **Signal B (PB3)**: Configured as an input.
 - **Button (PB5)**: Configured as an input with pull-up resistor.
 
