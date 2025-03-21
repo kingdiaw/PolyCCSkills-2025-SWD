@@ -60,8 +60,8 @@ all: main-build
 main-build: rotary_encoder.elf secondary-outputs
 
 # Tool invocations
-rotary_encoder.elf rotary_encoder.map: $(OBJS) $(USER_OBJS) C:\Users\kingd\STM32CubeIDE\workspace_1.17.0\rotary_encoder\STM32L053R8TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "rotary_encoder.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m0plus -T"C:\Users\kingd\STM32CubeIDE\workspace_1.17.0\rotary_encoder\STM32L053R8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="rotary_encoder.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+rotary_encoder.elf rotary_encoder.map: $(OBJS) $(USER_OBJS) C:\Users\kingd\git\repository\rotary_encoder\STM32L053R8TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "rotary_encoder.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m0plus -T"C:\Users\kingd\git\repository\rotary_encoder\STM32L053R8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="rotary_encoder.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

@@ -49,6 +49,7 @@ UART_HandleTypeDef huart2;
 RotaryEncoder_t encoder;
 int8_t pos;
 uint8_t sw_state_new, sw_state_old;
+uint32_t t0_i2c_scan;
 
 /* USER CODE END PV */
 
@@ -100,8 +101,7 @@ int main(void) {
 	MX_USART2_UART_Init();
 	MX_I2C1_Init();
 	/* USER CODE BEGIN 2 */
-	RotaryEncoder_Init(&encoder, GPIOA, GPIO_PIN_10, GPIOB, GPIO_PIN_3, GPIOB,
-	GPIO_PIN_5);
+	RotaryEncoder_Init(&encoder, GPIOA, GPIO_PIN_10, GPIOB, GPIO_PIN_3, GPIOB, GPIO_PIN_5);
 	pos = 0;
 	/* USER CODE END 2 */
 
@@ -112,14 +112,14 @@ int main(void) {
 
 		/* USER CODE BEGIN 3 */
 		sw_state_new = RotaryEncoder_ReadSwitch(&encoder);
-		if (sw_state_old == GPIO_PIN_SET && sw_state_new == GPIO_PIN_RESET) {
+		if (sw_state_old == GPIO_PIN_RESET && sw_state_new == GPIO_PIN_SET) {
 			printf("Button Pressed!\n");
 		}
 		sw_state_old = sw_state_new;
 
 		if (encoder.direction != ROTARY_NONE) {
 			printf("Encoder Direction: %s\n",
-					encoder.direction == 1 ? "CW" : "CCW");
+					encoder.direction == ROTARY_CW ? "CW" : "CCW");
 			if (encoder.direction == ROTARY_CW) {
 				if (++pos > 5)
 					pos = 5;
@@ -130,6 +130,10 @@ int main(void) {
 				encoder.direction = ROTARY_NONE;
 			}
 			printf("Encoder Pos: %d\n", pos);
+		}
+		if(HAL_GetTick() > t0_i2c_scan){
+			t0_i2c_scan = HAL_GetTick() + 5000;
+			I2C_Scan();
 		}
 		HAL_Delay(50);	//debounching
 	}

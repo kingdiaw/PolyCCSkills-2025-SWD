@@ -29,4 +29,4 @@ void RotaryEncoder_Init(RotaryEncoder_t *encoder, GPIO_TypeDef *A_Port,
 void RotaryEncoder_Update(RotaryEncoder_t *encoder);
 uint8_t RotaryEncoder_ReadSwitch(RotaryEncoder_t *encoder);
 
-#endif // ROTARY_ENCODER_H
+#endif // ws2812_NeoPixel_H
