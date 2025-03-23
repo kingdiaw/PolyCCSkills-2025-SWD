@@ -62,8 +62,8 @@ uint8_t sw_state_new, sw_state_old;
 uint32_t t0_i2c_scan, t1_encoder_scan, t2_led_push, t3_led_toggle,
 		t4_tm1651_run, t5_display_dot;
 uint8_t level;
-uint16_t adc_raw_joystick_x, adc_raw_joystick_y;
-uint16_t adc_raw[2];
+uint16_t adc_raw_joystick_x, adc_raw_joystick_y, adc_raw_mic;
+uint16_t adc_raw[3];
 
 // Bitmap data for smiley faces
 static const uint8_t smile_bmp[] = { 0b00111100, 0b01000010, 0b10100101,
@@ -190,9 +190,9 @@ int main(void)
 			}
 		}
 		if (HAL_GetTick() > t2_led_push) {
-			t2_led_push = HAL_GetTick() + 1000;
+			t2_led_push = HAL_GetTick() + 100;
 			HAL_ADC_Start_DMA(&hadc, (uint32_t*) adc_raw, sizeof(adc_raw));
-			//printf("x:%d\ty:%d\n",adc_raw[0], adc_raw[1]);
+			printf("x:%d\ty:%d\tMIC:%d\n",adc_raw[0], adc_raw[1],adc_raw[2]);
 
 		}
 		if (HAL_GetTick() > t3_led_toggle) {
@@ -323,6 +323,14 @@ static void MX_ADC_Init(void)
   /** Configure for the selected ADC regular channel to be converted.
   */
   sConfig.Channel = ADC_CHANNEL_4;
+  if (HAL_ADC_ConfigChannel(&hadc, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure for the selected ADC regular channel to be converted.
+  */
+  sConfig.Channel = ADC_CHANNEL_8;
   if (HAL_ADC_ConfigChannel(&hadc, &sConfig) != HAL_OK)
   {
     Error_Handler();

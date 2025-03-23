@@ -76,6 +76,8 @@ void Error_Handler(void);
 #define TM1651_CLK_GPIO_Port GPIOA
 #define TM1651_DIO_Pin GPIO_PIN_7
 #define TM1651_DIO_GPIO_Port GPIOA
+#define MIC_Pin GPIO_PIN_0
+#define MIC_GPIO_Port GPIOB
 #define Encoder_Sig_A_Pin GPIO_PIN_10
 #define Encoder_Sig_A_GPIO_Port GPIOA
 #define Encoder_Sig_A_EXTI_IRQn EXTI4_15_IRQn
