@@ -33,11 +33,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define MAX_LED	1
-#define TM1651_CLK_PORT GPIOA
-#define TM1651_CLK_PIN  GPIO_PIN_6
-#define TM1651_DATA_PORT GPIOA
-#define TM1651_DATA_PIN  GPIO_PIN_7
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/

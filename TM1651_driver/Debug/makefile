@@ -60,8 +60,8 @@ all: main-build
 main-build: TM1651_driver.elf secondary-outputs
 
 # Tool invocations
-TM1651_driver.elf TM1651_driver.map: $(OBJS) $(USER_OBJS) C:\Users\kingd\STM32CubeIDE\workspace_1.17.0\TM1651_driver\STM32L053R8TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "TM1651_driver.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m0plus -T"C:\Users\kingd\STM32CubeIDE\workspace_1.17.0\TM1651_driver\STM32L053R8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="TM1651_driver.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+TM1651_driver.elf TM1651_driver.map: $(OBJS) $(USER_OBJS) C:\Users\kingd\git\repository\TM1651_driver\STM32L053R8TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "TM1651_driver.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m0plus -T"C:\Users\kingd\git\repository\TM1651_driver\STM32L053R8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="TM1651_driver.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
