@@ -27,5 +27,7 @@ void HT16K33_BlinkRate(HT16K33_HandleTypeDef *hdev, uint8_t rate);
 void HT16K33_Clear(HT16K33_HandleTypeDef *hdev);
 void HT16K33_WriteDisplay(HT16K33_HandleTypeDef *hdev);
 void HT16K33_DrawPixel(HT16K33_HandleTypeDef *hdev, uint8_t x, uint8_t y, bool state);
+//void DisplayBitmapWithRotate(HT16K33_HandleTypeDef *hdev, const uint8_t *bitmap, int8_t rotateDirection);
+void HT16K33_DisplayBitmapWithRotate(HT16K33_HandleTypeDef *hdev, const uint8_t *bitmap, int8_t rotateDirection);
 
 #endif // HT16K33_H

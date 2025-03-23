@@ -65,3 +65,31 @@ void HT16K33_DrawPixel(HT16K33_HandleTypeDef *hdev, uint8_t x, uint8_t y, bool s
         hdev->displayBuffer[y] &= ~(1 << x);
 }
 
+void HT16K33_DisplayBitmapWithRotate(HT16K33_HandleTypeDef *hdev, const uint8_t *bitmap, int8_t rotateDirection) {
+    static uint8_t rotateOffset = 0; // Tracks the current rotation position
+
+    // Update the rotate offset based on the direction
+    if (rotateDirection == 1) {
+        rotateOffset = (rotateOffset + 1) % 16; // Rotate right
+    } else if (rotateDirection == -1) {
+        rotateOffset = (rotateOffset - 1 + 16) % 16; // Rotate left
+    }
+    // If rotateDirection is 0, rotateOffset remains unchanged (static display)
+
+    // Convert the 8x8 bitmap into the 8x16 display buffer with rotation
+    for (uint8_t y = 0; y < 8; y++) {
+        // Center the 8x8 bitmap by shifting it left by 4 bits
+        uint16_t rowData = (uint16_t)bitmap[y] << 4;
+
+        // Apply the rotation by shifting the row data based on rotateOffset
+        if (rotateDirection != 0) {
+            // Rotate the row data by rotateOffset bits
+            rowData = (rowData << rotateOffset) | (rowData >> (16 - rotateOffset));
+        }
+
+        // Store the rotated row data in the display buffer
+        hdev->displayBuffer[y] = rowData;
+    }
+
+    HT16K33_WriteDisplay(hdev); // Update the display
+}

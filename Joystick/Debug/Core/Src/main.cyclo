@@ -1,5 +1,4 @@
 ../Core/Src/main.c:95:5:__io_putchar	1
-../Core/Src/main.c:100:6:DisplayBitmapWithRotate	7
 ../Core/Src/main.c:135:5:main	17
 ../Core/Src/main.c:254:6:SystemClock_Config	4
 ../Core/Src/main.c:306:13:MX_ADC_Init	4

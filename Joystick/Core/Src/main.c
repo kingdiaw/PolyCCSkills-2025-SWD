@@ -97,35 +97,6 @@ int __io_putchar(int ch) {
 	return ch;
 }
 
-void DisplayBitmapWithRotate(const uint8_t *bitmap, int8_t rotateDirection) {
-    static uint8_t rotateOffset = 0; // Tracks the current rotation position
-
-    // Update the rotate offset based on the direction
-    if (rotateDirection == 1) {
-        rotateOffset = (rotateOffset + 1) % 16; // Rotate right
-    } else if (rotateDirection == -1) {
-        rotateOffset = (rotateOffset - 1 + 16) % 16; // Rotate left
-    }
-    // If rotateDirection is 0, rotateOffset remains unchanged (static display)
-
-    // Convert the 8x8 bitmap into the 8x16 display buffer with rotation
-    for (uint8_t y = 0; y < 8; y++) {
-        // Center the 8x8 bitmap by shifting it left by 4 bits
-        uint16_t rowData = (uint16_t)bitmap[y] << 4;
-
-        // Apply the rotation by shifting the row data based on rotateOffset
-        if (rotateDirection != 0) {
-            // Rotate the row data by rotateOffset bits
-            rowData = (rowData << rotateOffset) | (rowData >> (16 - rotateOffset));
-        }
-
-        // Store the rotated row data in the display buffer
-        hdev.displayBuffer[y] = rowData;
-    }
-
-    HT16K33_WriteDisplay(&hdev); // Update the display
-}
-
 /* USER CODE END 0 */
 
 /**
@@ -241,7 +212,7 @@ int main(void)
 			if (++i > 16)
 				i = 0;
 			//DisplayBitmapWithRotate(smile_bmp, (pos>2)?1:-1); // Shift left
-			DisplayBitmapWithRotate(smile_bmp, 1); // Shift left
+			HT16K33_DisplayBitmapWithRotate(&hdev, smile_bmp, 1); // Shift left
 		}
 	}
   /* USER CODE END 3 */
